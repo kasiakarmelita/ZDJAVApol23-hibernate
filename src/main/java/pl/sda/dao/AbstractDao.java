@@ -1,8 +1,9 @@
 package pl.sda.dao;
 
-import pl.sda.database.EntityManagerProvider;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import pl.sda.database.SessionProvider;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
 public abstract class AbstractDao<T> {
@@ -14,37 +15,32 @@ public abstract class AbstractDao<T> {
     }
 
     public T findById(int id) {
-        EntityManager entityManager = EntityManagerProvider.getEntityManager();
-        entityManager.getTransaction().begin();
-        T record = entityManager.find(clazz, id);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        Session session = SessionProvider.getSession();
+        T record = session.find(clazz, id);
+        session.close();
         return record;
     }
 
     public List<T> findAll() {
-        EntityManager entityManager = EntityManagerProvider.getEntityManager();
-        entityManager.getTransaction().begin();
-        List<T> records =
-            entityManager.createQuery("from " + clazz.getCanonicalName(), clazz).getResultList();
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        Session session = SessionProvider.getSession();
+        List<T> records = session.createQuery("from " + clazz.getCanonicalName(), clazz).list();
+        session.close();
         return records;
     }
 
     public void add(T record) {
-        EntityManager entityManager = EntityManagerProvider.getEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.persist(record);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        Session session = SessionProvider.getSession();
+        Transaction transaction = session.beginTransaction();
+        session.save(record);
+        transaction.commit();
+        session.close();
     }
 
     public void update(T record) {
-        EntityManager entityManager = EntityManagerProvider.getEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.merge(record);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        Session session = SessionProvider.getSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(record);
+        transaction.commit();
+        session.close();
     }
 }

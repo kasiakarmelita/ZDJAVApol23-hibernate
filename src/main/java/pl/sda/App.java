@@ -32,10 +32,10 @@ public class App {
 
         Adress adressKasia = new Adress("Nowa", 60, "Wrocław", "53-239");
         Employee kasia = new Employee("Katarzyna", "Karmelita", departmentDao.findById(1), adressKasia);
-        Employee arkadiusz = new Employee("Arkadiusz", "Kowalski", departmentDao.findById(2));
+//        Employee arkadiusz = new Employee("Arkadiusz", "Kowalski", departmentDao.findById(2));
 
         employeeDao.add(kasia);
-        employeeDao.add(arkadiusz);
+//        employeeDao.add(arkadiusz);
 
         employeeDao.findAll().forEach(employee -> System.out.println(employee.toString()));
 

@@ -1,6 +1,8 @@
 package pl.sda.model;
 
+import org.hibernate.Session;
 import org.hibernate.annotations.GenericGenerator;
+import pl.sda.database.SessionProvider;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -49,6 +51,8 @@ public class Department {
         Department that = (Department) o;
         return id == that.id && Objects.equals(name, that.name);
     }
+
+
 
     @Override
     public int hashCode() {

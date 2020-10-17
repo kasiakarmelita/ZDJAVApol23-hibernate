@@ -24,13 +24,20 @@ public class Employee {
     @ManyToOne(targetEntity = Department.class)
     private Department department;
 
-    public Employee() {
-    }
+    @Embedded
+    private Adress adress;
 
-    public Employee(String firstName, String lastName, Department department) {
+    public Employee(String firstName, String lastName, Department department, Adress adress) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.department = department;
+        this.adress = adress;
+    }
+
+
+
+    public Employee() {
     }
 
     public int getId() {
@@ -65,6 +72,14 @@ public class Employee {
         this.department = department;
     }
 
+    public Adress getAdress() {
+        return adress;
+    }
+
+    public void setAdress(Adress adress) {
+        this.adress = adress;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -83,7 +98,12 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" + "id=" + id + ", firstName='" + firstName + '\'' + ", lastName='"
-            + lastName + '\'' + ", department=" + department + '}';
+        return "Employee{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", department=" + department +
+                ", adress=" + adress +
+                '}';
     }
 }

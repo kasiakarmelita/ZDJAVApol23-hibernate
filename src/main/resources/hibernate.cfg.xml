@@ -8,12 +8,16 @@
         <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.username">root</property>
-        <property name="connection.password">Polska123!</property>
+        <property name="connection.password">KAWI89kawi!</property>
         <property name="connection.url">jdbc:mysql://localhost:3306/EMPLOYEES_HIBERNATE?serverTimezone=UTC</property>
         <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
         <property name="show_sql">true</property>
+<!--      tutaj przy aplikacji warto dać false, żeby nie wyświetlał w konsoli wszytskich poleceń - zaśmieca aplikację  /-->
         <property name="hbm2ddl.auto">update</property>
         <mapping class="pl.sda.model.Department"/>
         <mapping class="pl.sda.model.Employee"/>
+        <mapping class="pl.sda.model.Classroom"/>
+
+
     </session-factory>
 </hibernate-configuration>
